@@ -17,10 +17,10 @@ export default function RootLayout() {
       router.replace('/onboarding');
     }
   }, [isFirstLaunch, router]);
-  
+
   return (
     <SafeAreaProvider>
-      <StatusBar style={'auto'} />
+      <StatusBar style={'dark'} />
       <Header />
       <Stack screenOptions={{headerShown: false}}>
         <Stack.Screen name='(tabs)' />

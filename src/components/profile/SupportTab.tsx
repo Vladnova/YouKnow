@@ -2,7 +2,7 @@ import { COLORS } from '@/src/constants/colors';
 import { contentService } from '@/src/services/api';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 
 const SupportTab = () => {
   const {t} = useTranslation();

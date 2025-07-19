@@ -7,7 +7,6 @@ import {FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, useWindowDim
 import Animated, {interpolate, useAnimatedStyle, useSharedValue, withSpring,} from 'react-native-reanimated';
 import {onboardingUtils} from '@/app/utils/onboarding';
 
-
 type OnboardingSlide = {
   id: string;
   title: string;

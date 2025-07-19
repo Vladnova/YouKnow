@@ -1,13 +1,13 @@
-import {router} from 'expo-router';
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View} from 'react-native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import {COLORS} from '@/src/constants/colors';
-import {contentService} from '@/src/services/api';
-import {useContentStore} from '@/src/store/contentStore';
+
+import { COLORS } from '@/src/constants/colors';
 // import onboardingUtils from '../utils/onboarding';
-import Loader from '@/src/components/shared/Loader';
+import CategoriesTab from '@/src/components/home/CategoriesTab';
+import NewsTab from '@/src/components/home/NewsTab';
+import TabSelector from '@/src/components/profile/TabSelector';
 
 const fanFactImg = require('@/src/assets/images/fanFact.png');
 const scienceFactImg = require('@/src/assets/images/scienceFact.png');
@@ -26,10 +26,8 @@ const categories = [
 ];
 
 const HomeScreen = () => {
-  const [loading, setLoading] = useState(false);
-  const [loadingButtonId, setLoadingButtonId] = useState<number | null>(null);
-  const setContent = useContentStore((state) => state.setContent);
-  const {width} = useWindowDimensions();
+  const [activeTab, setActiveTab] = useState('categories');
+  const { width } = useWindowDimensions();
   const isTablet = width >= 768;
   const numColumns = isTablet ? 3 : 2;
   const gap = isTablet ? 24 : 16;
@@ -37,96 +35,51 @@ const HomeScreen = () => {
   const itemWidth = isTablet
     ? (width - horizontalPadding - gap * (numColumns - 1)) / numColumns
     : '48%';
-  const {t, i18n} = useTranslation();
-  
-  const handleButtonPress = async (id: number, route: string) => {
-    setLoading(true);
-    setLoadingButtonId(id);
-    
-    try {
-      const data = await contentService.getContent(route, i18n.language);
-      setContent(data.message);
-      router.push('/content');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : t('common.errorMessage');
-      Alert.alert(
-        t('common.errorTitle'),
-        errorMessage,
-        [{text: t('common.ok'), style: 'default'}]
-      );
-      setContent(errorMessage);
-    } finally {
-      setLoading(false);
-      setLoadingButtonId(null);
-    }
-  }
-  
+  const { t } = useTranslation();
+
   // const handleResetOnboarding = async () => {
   //   try {
   //     await onboardingUtils.resetOnboarding();
   //     Alert.alert(
   //       t('common.success'),
   //       'Онбординг успешно сброшен',
-  //       [{text: t('common.ok'), style: 'default'}]
+  //       [{ text: t('common.ok'), style: 'default' }]
   //     );
   //   } catch (error) {
   //     Alert.alert(
   //       t('common.errorTitle'),
   //       'Ошибка при сбросе онбординга',
-  //       [{text: t('common.ok'), style: 'default'}]
+  //       [{ text: t('common.ok'), style: 'default' }]
   //     );
   //   }
   // };
-  
+
+  const renderContent = () => {
+    if (activeTab === 'categories') {
+      return (
+        <CategoriesTab
+          categories={categories}
+          isTablet={isTablet}
+          numColumns={numColumns}
+          gap={gap}
+          itemWidth={typeof itemWidth === 'number' ? itemWidth : 0}
+        />
+      );
+    }
+    return <NewsTab />;
+  };
+
   return (
     <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={[styles.blockBtn, isTablet && styles.blockBtnTablet]}
-        data={categories}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={numColumns}
-        columnWrapperStyle={isTablet ? {gap} : styles.row}
-        ListHeaderComponent={
-          <Text style={[styles.headerText, isTablet && styles.headerTextTablet]}>{t('home.chooseCategory')}</Text>}
-        // ListFooterComponent={
-        //   __DEV__ ? (
-        //     <TouchableOpacity
-        //       style={styles.resetButton}
-        //       onPress={handleResetOnboarding}
-        //     >
-        //       <Text style={styles.resetButtonText}>Сбросить онбординг</Text>
-        //     </TouchableOpacity>
-        //   ) : null
-        // }
-        renderItem={({item, index}) => (
-          <View
-            style={[
-              styles.gridItem,
-              isTablet && {width: itemWidth},
-              isTablet && styles.gridItemTablet,
-            ]}
-          >
-            <TouchableOpacity
-              style={[styles.btn, isTablet && styles.btnTablet]}
-              onPress={() => handleButtonPress(item.id, item.route)}
-              disabled={loading}
-            >
-              <View style={styles.buttonContent}>
-                {loadingButtonId === item.id && <Loader />}
-                <Image
-                  source={item.img}
-                  style={[styles.logo, isTablet && styles.logoTablet]}
-                  resizeMode="cover"
-                />
-                <Text
-                  style={[styles.textBtn, isTablet && styles.textBtnTablet]}
-                  numberOfLines={2}
-                >{t(`home.categories.${item.name}`)}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        )}
+      <TabSelector
+        activeTab={activeTab}
+        onTabPress={setActiveTab}
+        tabs={[
+          { key: 'categories', label: t('home.tabs.categories') },
+          { key: 'news', label: t('home.tabs.news') },
+        ]}
       />
+      {renderContent()}
     </View>
   );
 };
