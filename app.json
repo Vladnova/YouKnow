@@ -2,7 +2,7 @@
   "expo": {
     "name": "Iwonder",
     "slug": "Iwonder",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "iwonder",
@@ -50,7 +50,7 @@
         "projectId": "44d75b51-3fa0-45a7-b96a-aab42d262997"
       }
     },
-    "runtimeVersion": "1.0.0",
+    "runtimeVersion": "1.1.1",
     "updates": {
       "url": "https://u.expo.dev/44d75b51-3fa0-45a7-b96a-aab42d262997"
     }

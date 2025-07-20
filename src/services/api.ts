@@ -2,6 +2,7 @@ import axios, { isAxiosError } from 'axios';
 import { t } from 'i18next';
 
 const API_URL = "https://iwonder-8z2j.onrender.com";
+// const API_URL = "http://localhost:8000";
 
 export interface ContentResponse {
   message: string;
