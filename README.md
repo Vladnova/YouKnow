@@ -5,6 +5,14 @@ This repository contains both the **frontend** (React Native + Expo) and **backe
 
 ---
 
+<p align="center">
+  <img src="./assets/images/ui-categories.jpeg" alt="Categories Screen" width="250" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./assets/images/ui-languages.jpeg" alt="Language Selection Screen" width="250" />
+</p>
+
+> **Note:** The application successfully passed Apple's strict review process and was published on the App Store, generating over 1.6k organic impressions and real-world user engagement.
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
@@ -39,6 +47,18 @@ This repository contains both the **frontend** (React Native + Expo) and **backe
 The backend provides REST API endpoints, content management, health checks, and scheduled tasks.
 
 ---
+## App Store Analytics
+
+The application demonstrated successful production deployment and user acquisition:
+- **Visibility:** Over 1,600 impressions in the App Store with a 1.77% conversion rate.
+- **User Base:** Distributed globally with primary audiences in Ukraine, mainland China, and Australia.
+- **Stability:** Achieved high reliability with nearly zero crash reports during active sessions.
+
+<p align="center">
+  <img src="./assets/images/app-store-stats-1.jpeg" alt="App Store Connect Analytics" width="600" />
+  <img src="./assets/images/app-store-stats-2.jpeg" alt="App Store Connect Analytics" width="600" />
+  <img src="./assets/images/app-store-stats-3.jpeg" alt="App Store Connect Analytics" width="600" />
+</p>
 
 ## Tech Stack
 
