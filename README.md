@@ -15,6 +15,7 @@ This repository contains both the **frontend** (React Native + Expo) and **backe
 
 ## Table of Contents
 - [Project Overview](#project-overview)
+- [App Store Analytics](#app-store-analytics)
 - [Tech Stack](#tech-stack)
 - [Monorepo Structure](#monorepo-structure)
 - [Frontend](#frontend)
